@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Scape</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <h1 class="welcome-title">SoundScape Worlds</h1>
+            <p class="welcome-subtitle">An interactive audio-visual experience.</p>
+            <div id="how-to-guide">
+                <h3>How to Play</h3>
+                <p><span>Click</span> tiles to make sound. <span>Drag mouse</span> to look around.</p>
+                <p>Use <span>number keys (1-4)</span> to switch sound kits quickly.</p>
+            </div>
+            <button id="enter-btn">Enter World</button>
+        </div>
+    </div>
+
+    <!-- Main UI -->
+    <div id="main-ui" class="hidden">
+        <div id="controls-container">
+            <div id="sound-controls">
+                <span class="control-title">Sound Kit:</span>
+                <select id="kit-select"></select>
+            </div>
+            <div id="sequencer-controls">
+                <button id="record-btn" title="Record (R)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="7"></circle></svg>
+                </button>
+                <button id="play-btn" title="Play (P)" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                </button>
+                <button id="stop-btn" title="Stop (S)" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z"></path></svg>
+                </button>
+                <button id="clear-btn" title="Clear (C)" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+                </button>
+            </div>
+             <div id="tool-controls">
+                <button id="download-btn" title="Download as MP3" disabled>
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"></path></svg>
+                    </div>
+                    <div class="spinner hidden"></div>
+                </button>
+                <button id="share-btn" title="Share Sequence" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"></path></svg>
+                </button>
+            </div>
+            <div id="theme-controls">
+                <span class="control-title">Theme:</span>
+                <div id="theme-switcher"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="hidden">
+        <div class="modal-content">
+            <h2>Share Your Soundscape</h2>
+            <p>Copy the link below to share your recorded sequence!</p>
+            <div class="share-link-container">
+                <input type="text" id="share-url-input" readonly>
+                <button id="copy-link-btn">Copy</button>
+            </div>
+            <button id="close-modal-btn">Close</button>
+        </div>
+    </div>
+    
+    <!-- This container is where the 3D scene will be rendered -->
+    <div id="webgl-container"></div>
+
+    <!-- MP3 Encoding Library -->
+    <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.min.js"></script>
+    
+    <!-- Three.js and Add-ons -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+    
+    <!-- Main Application Logic -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
